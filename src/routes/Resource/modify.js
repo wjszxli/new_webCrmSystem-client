@@ -256,6 +256,15 @@ export default Form.create()(
               </Col>
             </Row>
             <Row>
+              <Col span={24} pull={4}>
+                <FormItem {...formItemLayout} label="联系方式">
+                  {getFieldDecorator('phone', {
+                    initialValue: '',
+                  })(<Input type="number" placeholder="输入联系方式" />)}
+                </FormItem>
+              </Col>
+            </Row>
+            <Row>
               <Col span={12}>
                 <FormItem {...formItemLayout} label="备注">
                   {getFieldDecorator('remark', {

@@ -770,6 +770,7 @@ export default Form.create()(
         { title: '女粉比例', dataIndex: 'womenRatio', key: 'womenRatio' },
         { title: '是否刷号', dataIndex: 'brush', key: 'brush' },
         { title: '类型', dataIndex: 'type', key: 'type' },
+        { title: '联系方式', dataIndex: 'phone', key: 'phone' },
         {
           title: '更新时间', dataIndex: 'updateTime', key: 'updateTime',
           render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
@@ -785,6 +786,8 @@ export default Form.create()(
           },
         },
       ];
+
+
 
       return (
         <PageHeaderLayout title="公众号资源库">
