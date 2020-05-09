@@ -260,7 +260,7 @@ export default Form.create()(
                 <FormItem {...formItemLayout} label="联系方式">
                   {getFieldDecorator('phone', {
                     initialValue: '',
-                  })(<Input type="number" placeholder="输入联系方式" />)}
+                  })(<Input placeholder="输入联系方式" />)}
                 </FormItem>
               </Col>
             </Row>
