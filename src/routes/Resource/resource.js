@@ -835,6 +835,7 @@ export default Form.create()(
                 onCancel={this.closeModify}
                 current={this.state.current}
                 getPageData={this.getPageData}
+                isMaster={this.state.isMaster}
                 id={this.state.id}
               />
             )

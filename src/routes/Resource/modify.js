@@ -58,10 +58,11 @@ export default Form.create()(
       if (!this.props.isAdd) {
         this.props.form.setFieldsValue(this.props.editData[0])
       }
+      console.log('this.props', this.props)
     }
 
     render() {
-      const { visible, onCancel } = this.props;
+      const { visible, onCancel, editData, isMaster } = this.props;
       const { getFieldDecorator } = this.props.form;
       const formItemLayout = {
         labelCol: {
@@ -73,6 +74,15 @@ export default Form.create()(
           sm: { span: 16 },
         },
       };
+      const { userId } = editData[0]
+      const getUserId = localStorage.getItem('id')
+      let isShowPhone = isMaster
+      if (!isShowPhone) {
+        isShowPhone = Number(userId) === Number(getUserId)
+      }
+      if (!isShowPhone) {
+        editData[0].phone = ''
+      }
       return (
         <Modal
           visible={visible}
