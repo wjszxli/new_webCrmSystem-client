@@ -258,6 +258,9 @@ export default Form.create()(
             case '备注':
               data.remark = item[oldVal].replace(/\s+/g, "")
               break;
+            case '联系方式':
+              data.phone = item[oldVal].replace(/\s+/g, "")
+              break;
             default:
           }
         })
