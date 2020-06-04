@@ -622,6 +622,38 @@ export default Form.create()(
 
     }
 
+    deletePublicNumberMore = async () => {
+      const { selectedRowKeys, listData } = this.state
+      if (!selectedRowKeys.length) {
+        message.error('请选择对应的公众号')
+        return
+      }
+
+      let ids = ''
+      selectedRowKeys.forEach(item => {
+        ids += `${listData[item].id},`
+      })
+      ids = ids.substring(0, ids.length - 1)
+
+      const url = `${config.apiUrl}/deletePublicNumberMore?ids=${ids}`
+      const options = {
+        method: 'POST',
+      }
+      const res = await request(url, options)
+      if (res) {
+        if (res.code === 0) {
+          if (res.data.tip) {
+            message.success(res.data.tip);
+            this.getPageData(1)
+            this.setState({
+              selectedRowKeys: [],
+            })
+          }
+        }
+      }
+
+    }
+
     closeModify = () => {
       this.setState({
         isShowModify: false,
@@ -679,6 +711,9 @@ export default Form.create()(
                 </Button>
               </span>
             )}
+          {
+            this.state.isMaster && <span><Button type="primary" onClick={this.deletePublicNumberMore}>批量删除</Button></span>
+          }
           <div style={{ display: 'none' }}>
             <Upload {...props}>
               <Button id="imageUpdate">上传</Button>
