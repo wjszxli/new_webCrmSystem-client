@@ -54,8 +54,11 @@ const menuData = [
       },
       {
         name: '管理权限',
-        path: '/author',
-      },
+        path: 'author',
+      }, {
+        name: '资源转移',
+        path: 'synchronization'
+      }
     ],
   },
 ];

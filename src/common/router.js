@@ -75,13 +75,13 @@ export const getRouterData = app => {
     '/': {
       component: dynamicWrapper(app, ['user', 'login'], () => import('../layouts/BasicLayout')),
     },
-    '/resource/resource':{
+    '/resource/resource': {
       component: dynamicWrapper(app, [], () => import('../routes/Resource/resource')),
     },
-    '/resource/havaplan':{
+    '/resource/havaplan': {
       component: dynamicWrapper(app, ['customer'], () => import('../routes/havePlan/havePlan')),
     },
-    '/resource/removeplan':{
+    '/resource/removeplan': {
       component: dynamicWrapper(app, ['customer'], () => import('../routes/removePlan/removePlan')),
     },
     '/customer/customer': {
@@ -93,10 +93,13 @@ export const getRouterData = app => {
     '/system/modifypassword': {
       component: dynamicWrapper(app, ['customer'], () => import('../routes/ModifyPassword/ModifyPassword')),
     },
-    '/system/account':{
+    '/system/account': {
       component: dynamicWrapper(app, ['customer'], () => import('../routes/Account/Account')),
     },
-    '/exportAll':{
+    '/system/synchronization': {
+      component: dynamicWrapper(app, ['customer'], () => import('../routes/synchronization/index')),
+    },
+    '/exportAll': {
       component: ExportAll,
     },
     '/exception/403': {

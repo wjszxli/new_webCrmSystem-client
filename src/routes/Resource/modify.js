@@ -270,6 +270,11 @@ export default Form.create()(
                 <FormItem {...formItemLayout} label="联系方式">
                   {getFieldDecorator('phone', {
                     initialValue: '',
+                    rules: [{
+                      required: true,
+                      whitespace: true,
+                      message: '请输入联系方式',
+                    }]
                   })(<Input placeholder="输入联系方式" />)}
                 </FormItem>
               </Col>

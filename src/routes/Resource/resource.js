@@ -575,7 +575,7 @@ export default Form.create()(
     }
 
     showModify = async () => {
-      const { selectedRowKeys } = this.state
+      const { selectedRowKeys, isMedium } = this.state
       if (!selectedRowKeys.length) {
         message.error('请选择对应的公众号')
         return
@@ -585,6 +585,13 @@ export default Form.create()(
         return
       }
       await this.getOnePublicNumber()
+      const dataUserId = this.state.listData[this.state.selectedRowKeys[0]].userId
+      const userId = window.localStorage.getItem('id')
+      // 媒介权限处理
+      if (userId !== dataUserId && isMedium) {
+        message.error("只允许修改自己的数据哦")
+        return false
+      }
       const id = this.state.listData[this.state.selectedRowKeys[0]].id
 
       this.setState({
@@ -678,6 +685,8 @@ export default Form.create()(
           }
         },
       };
+      const phone = window.localStorage.getItem('phone')
+      const isBoss = phone === '15168248050'
       return (
         <div style={{ marginBottom: '10px' }}>
           {
@@ -706,13 +715,16 @@ export default Form.create()(
                 <Button type="primary" onClick={this.showModify}>
                   更新资源
                 </Button>
-                <Button type="primary" onClick={this.deletePublicNumber}>
-                  删除
-                </Button>
+
               </span>
             )}
           {
-            this.state.isMaster && <span><Button type="primary" onClick={this.deletePublicNumberMore}>批量删除</Button></span>
+            isBoss && <Button type="primary" onClick={this.deletePublicNumber}>
+              删除
+            </Button>
+          }
+          {
+            isBoss && <span><Button type="primary" onClick={this.deletePublicNumberMore}>批量删除</Button></span>
           }
           <div style={{ display: 'none' }}>
             <Upload {...props}>
