@@ -119,6 +119,10 @@ export default Form.create()(
       this.setState({ visibleRemark: false });
     }
 
+    Trim = (str) => {
+      return str.replace(/(^\s*)|(\s*$)/g, "");
+    }
+
     getPageData = (pageIndex, searchData) => {
       const { isSell, isCharge, isMaster, isMedium } = this.state
 
@@ -126,7 +130,8 @@ export default Form.create()(
       if (searchData) {
         const keys = Object.keys(searchData)
         keys.forEach(item => {
-          searchItem += `&${item}=${searchData[item]}`
+          const val = this.Trim(searchData[item])
+          searchItem += `&${item}=${val}`
         })
       }
       const userId = localStorage.getItem('id')

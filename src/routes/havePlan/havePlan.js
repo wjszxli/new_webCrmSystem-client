@@ -138,7 +138,8 @@ export default Form.create()(
       if (searchData) {
         const keys = Object.keys(searchData)
         keys.forEach(item => {
-          searchItem += `&${item}=${searchData[item]}`
+          const val = this.Trim(searchData[item])
+          searchItem += `&${item}=${val}`
         })
       }
       if (searchData && searchData.createTime) {
@@ -430,7 +431,7 @@ export default Form.create()(
     }
 
     getOneUser = async () => {
-      const { selectedRowKeys } = this.state
+      const { selectedRowKeys, isMedium, listData } = this.state
       if (selectedRowKeys.length === 0) {
         message.error('请选中数据进行操作')
         return
@@ -438,6 +439,13 @@ export default Form.create()(
       if (selectedRowKeys.length !== 1) {
         message.error('只允许一次修改一条数据')
         return
+      }
+      const id = selectedRowKeys[0]
+      const dataUserId = listData.filter(item => item.id === id)[0].userId
+      const userId = window.localStorage.getItem('id')
+      if (userId !== dataUserId && isMedium) {
+        message.error("只允许修改自己的数据哦")
+        return false
       }
       const url = `${config.apiUrl}/getOnePlan?id=${selectedRowKeys[0]}`
       const res = await request(url)
@@ -451,7 +459,6 @@ export default Form.create()(
             // visible: true,
             isAdd: false,
           })
-          console.log('editData', this.state.editData)
         } else {
           message.error(res.error);
         }
@@ -480,6 +487,10 @@ export default Form.create()(
       this.setState({
         visible: true,
       })
+    }
+
+    Trim = (str) => {
+      return str.replace(/(^\s*)|(\s*$)/g, "");
     }
 
     toExport = () => {
