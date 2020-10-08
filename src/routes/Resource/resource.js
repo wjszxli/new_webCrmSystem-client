@@ -598,7 +598,7 @@ export default Form.create()(
       const dataUserId = this.state.listData[this.state.selectedRowKeys[0]].userId
       const userId = window.localStorage.getItem('id')
       // 媒介权限处理
-      if (userId !== dataUserId && isMedium) {
+      if (isMedium && userId !== dataUserId) {
         message.error("只允许修改自己的数据哦")
         return false
       }

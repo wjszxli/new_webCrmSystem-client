@@ -446,7 +446,7 @@ export default Form.create()(
       const id = selectedRowKeys[0]
       const dataUserId = listData.filter(item => item.id === id)[0].userId
       const userId = window.localStorage.getItem('id')
-      if (userId !== dataUserId && isMedium) {
+      if (isMedium && userId !== dataUserId) {
         message.error("只允许修改自己的数据哦")
         return false
       }
