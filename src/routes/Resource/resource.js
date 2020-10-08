@@ -120,6 +120,8 @@ export default Form.create()(
     }
 
     Trim = (str) => {
+      console.log('str', str)
+
       return str.replace(/(^\s*)|(\s*$)/g, "");
     }
 
@@ -130,8 +132,11 @@ export default Form.create()(
       if (searchData) {
         const keys = Object.keys(searchData)
         keys.forEach(item => {
-          const val = this.Trim(searchData[item])
-          searchItem += `&${item}=${val}`
+          let val = searchData[item]
+          if (typeof val === 'string') {
+            val = this.Trim(searchData[item])
+            searchItem += `&${item}=${val}`
+          }
         })
       }
       const userId = localStorage.getItem('id')
