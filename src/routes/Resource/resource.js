@@ -585,7 +585,7 @@ export default Form.create()(
     }
 
     showModify = async () => {
-      const { selectedRowKeys, isMedium } = this.state
+      const { selectedRowKeys, isMedium, isMaster } = this.state
       if (!selectedRowKeys.length) {
         message.error('请选择对应的公众号')
         return
@@ -598,7 +598,7 @@ export default Form.create()(
       const dataUserId = this.state.listData[this.state.selectedRowKeys[0]].userId
       const userId = window.localStorage.getItem('id')
       // 媒介权限处理
-      if (isMedium && userId !== dataUserId) {
+      if (isMedium && userId !== dataUserId && !isMaster) {
         message.error("只允许修改自己的数据哦")
         return false
       }

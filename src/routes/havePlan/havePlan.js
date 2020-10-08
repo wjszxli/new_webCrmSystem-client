@@ -434,7 +434,7 @@ export default Form.create()(
     }
 
     getOneUser = async () => {
-      const { selectedRowKeys, isMedium, listData } = this.state
+      const { selectedRowKeys, isMedium, listData, isMaster } = this.state
       if (selectedRowKeys.length === 0) {
         message.error('请选中数据进行操作')
         return
@@ -446,7 +446,7 @@ export default Form.create()(
       const id = selectedRowKeys[0]
       const dataUserId = listData.filter(item => item.id === id)[0].userId
       const userId = window.localStorage.getItem('id')
-      if (isMedium && userId !== dataUserId) {
+      if (isMedium && userId !== dataUserId && !isMaster) {
         message.error("只允许修改自己的数据哦")
         return false
       }
