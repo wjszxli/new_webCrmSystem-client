@@ -135,16 +135,18 @@ export default Form.create()(
       }
 
       let searchItem = ""
+      console.log('searchData', searchData)
       if (searchData) {
         const keys = Object.keys(searchData)
         keys.forEach(item => {
           let val = searchData[item]
-          if (typeof val === 'string') {
-            val = this.Trim(searchData[item])
+          if (typeof val === 'string' || typeof val === 'number') {
+            val = this.Trim(searchData[item].toString())
             searchItem += `&${item}=${val}`
           }
         })
       }
+      console.log('searchItem', searchItem)
       if (searchData && searchData.createTime) {
         searchItem += `&startTime=${moment(searchData.createTime[0]).format('YYYY-MM-DD')}`
         searchItem += `&endTime=${moment(searchData.createTime[1]).format('YYYY-MM-DD')}`
@@ -226,7 +228,9 @@ export default Form.create()(
         if (error) {
           return
         }
+        console.log('value', value)
         const valueString = JSON.stringify(value)
+        console.log('valueString', valueString)
         window.localStorage.setItem('value', valueString)
         this.getPageData(this.state.current)
         this.setState({
